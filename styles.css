@@ -2,4 +2,13 @@
     width: 200px;
     height: 200px;
     background-color: gray;
+    margin-bottom: 50px;
+}
+
+.form_row {
+    margin-bottom: 12px;
+}
+
+.form_row label {
+    display: block;
 }
