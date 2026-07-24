@@ -6,9 +6,7 @@ let currColor = generateRandomHslColor()
 
 // ** Event listeners ** // 
 document.addEventListener('DOMContentLoaded', () => {
-    const swatch = document.getElementById("swatch")
-    swatch.style.backgroundColor = createHslColor(currColor)
-
+    setRandomSwatchColor()
 
     const form = document.getElementById("hsl_form");
     form.addEventListener('submit', function(e) {
@@ -66,6 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
         lValueDisplay.textContent = lSlider.value;
     });
 })
+
+// ** Helper functions that interact with DOM ** // 
+function setRandomSwatchColor() {
+    const swatch = document.getElementById("swatch")
+    swatch.style.backgroundColor = createHslColor(currColor)
+}
 
 // ** Helper functions ** //
 function createHslColor({h, s, l}) {
