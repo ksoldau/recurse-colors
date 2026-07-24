@@ -7,6 +7,10 @@ body {
     font-family: Helvetica, Arial, sans-serif;
 }
 
+label {
+    font-weight: 600;
+}
+
 .swatch {
     border: 1px solid lightgray;
     padding: 20px 20px 40px 20px;

@@ -3,24 +3,34 @@
 // ** State ** //
 let currColor = generateRandomHslColor()
 
-
 // ** Event listeners ** // 
 document.addEventListener('DOMContentLoaded', () => {
     setRandomSwatchColor()
 
     const form = document.getElementById("hsl_form");
 
+    // Set up submit logic
     form.addEventListener('submit', function(e) {
         e.preventDefault()
 
-        // Show answers, hide inputs, disable submit button 
+        // Show answers and hide inputs
         form.classList.add('hsl_form--answer')
         form.classList.remove('hsl_form--guessing')
+
+        // Disable submit button
         document.getElementById("submit").disabled = true
+
+        // Add retry button 
+        const retryBtn = document.createElement('button')
+        retryBtn.type = 'button'
+        retryBtn.textContent = 'Try another'
+        retryBtn.addEventListener('click', () => location.reload())
+        form.appendChild(retryBtn)
 
         checkAnswers()
     })
 
+    // Set up logic to show slider values
     const sliderIds = ["h", "s", "l"];
     sliderIds.forEach((id) => {
         const slider = document.querySelector(`#${id} input`);
@@ -38,6 +48,7 @@ function checkAnswers() {
     const lEl = document.getElementById('l')
 
     const hGuess = hEl.querySelector('input').value
+    console.log('hGuess', hGuess)
     const sGuess = sEl.querySelector('input').value
     const lGuess = lEl.querySelector('input').value
 
