@@ -6,11 +6,11 @@ let currColor = generateRandomHslColor()
 
 // ** Event listeners ** // 
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById("hsl_form");
-    const hGuess = document.getElementBy
     const swatch = document.getElementById("swatch")
     swatch.style.backgroundColor = createHslColor(currColor)
 
+
+    const form = document.getElementById("hsl_form");
     form.addEventListener('submit', function(e) {
         e.preventDefault()
 
@@ -47,6 +47,24 @@ document.addEventListener('DOMContentLoaded', () => {
             lAnswerEl.innerHTML = `❌ ${lGuess} (Actual: ${currColor.l})`
         }
     })
+
+    const hSlider = document.querySelector("#h input");
+    const hValueDisplay = document.querySelector("#h .input-val");
+    hSlider.addEventListener("input", () => {
+        hValueDisplay.textContent = hSlider.value;
+    });
+
+    const sSlider = document.querySelector("#s input");
+    const sValueDisplay = document.querySelector("#s .input-val");
+    sSlider.addEventListener("input", () => {
+        sValueDisplay.textContent = sSlider.value;
+    });
+
+    const lSlider = document.querySelector("#l input");
+    const lValueDisplay = document.querySelector("#l .input-val");
+    lSlider.addEventListener("input", () => {
+        lValueDisplay.textContent = lSlider.value;
+    });
 })
 
 // ** Helper functions ** //

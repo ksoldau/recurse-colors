@@ -23,7 +23,7 @@ body {
     display: none;
 }
 
-.hsl_form--answer input {
+.hsl_form--answer .input-row {
     display: none;
 }
 
