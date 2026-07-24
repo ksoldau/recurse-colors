@@ -7,6 +7,7 @@ let currColor = generateRandomHslColor()
 // ** Event listeners ** // 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById("hsl_form");
+    const hGuess = document.getElementBy
     const swatch = document.getElementById("swatch")
     swatch.style.backgroundColor = createHslColor(currColor)
 
@@ -16,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
         form.classList.add('hsl_form--answer')
         form.classList.remove('hsl_form--guessing')
 
-        const hGuess = document.getElementById('h').value
-        const sGuess = document.getElementById('s').value
-        const lGuess = document.getElementById('l').value
+        const hGuess = document.getElementById('input_h').value
+        const sGuess = document.getElementById('input_s').value
+        const lGuess = document.getElementById('input_l').value
 
         checkGuess(guess, currColor);
         if (checkHGuess(hGuess, currColor.h) === 'pass') {
