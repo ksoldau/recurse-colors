@@ -9,61 +9,47 @@ document.addEventListener('DOMContentLoaded', () => {
     setRandomSwatchColor()
 
     const form = document.getElementById("hsl_form");
+
     form.addEventListener('submit', function(e) {
         e.preventDefault()
 
+        // Show answers, hide inputs, disable submit button 
         form.classList.add('hsl_form--answer')
         form.classList.remove('hsl_form--guessing')
+        document.getElementById("submit").disabled = true
 
-        const hGuess = document.getElementById('input_h').value
-        const sGuess = document.getElementById('input_s').value
-        const lGuess = document.getElementById('input_l').value
-
-        const hAnswerEl = document.querySelector('#h .answer')
-        const sAnswerEl = document.querySelector('#s .answer')
-        const lAnswerEl = document.querySelector('#l .answer')
-
-
-        hAnswerEl.innerHTML = "" 
-        if (checkHGuess(hGuess, currColor.h) === 'pass') {
-            hAnswerEl.innerHTML = `✅ ${hGuess} (Actual: ${currColor.h})`
-        } else {
-            hAnswerEl.innerHTML = `❌ ${hGuess} (Actual: ${currColor.h})`
-        }
-
-        sAnswerEl.innerHTML = "" 
-        if (checkSGuess(sGuess, currColor.s) === 'pass') {
-            sAnswerEl.innerHTML = `✅ ${sGuess} (Actual: ${currColor.s})`
-        } else {
-            sAnswerEl.innerHTML = `❌ ${sGuess} (Actual: ${currColor.s})`
-        }
-
-        lAnswerEl.innerHTML = "" 
-        if (checkLGuess(lGuess, currColor.l) === 'pass') {
-            lAnswerEl.innerHTML = `✅ ${lGuess} (Actual: ${currColor.l})`
-        } else {
-            lAnswerEl.innerHTML = `❌ ${lGuess} (Actual: ${currColor.l})`
-        }
+        checkAnswers()
     })
 
-    const hSlider = document.querySelector("#h input");
-    const hValueDisplay = document.querySelector("#h .input-val");
-    hSlider.addEventListener("input", () => {
-        hValueDisplay.textContent = hSlider.value;
-    });
+    const sliderIds = ["h", "s", "l"];
+    sliderIds.forEach((id) => {
+        const slider = document.querySelector(`#${id} input`);
+        const valueDisplay = document.querySelector(`#${id} .input-val`);
 
-    const sSlider = document.querySelector("#s input");
-    const sValueDisplay = document.querySelector("#s .input-val");
-    sSlider.addEventListener("input", () => {
-        sValueDisplay.textContent = sSlider.value;
-    });
-
-    const lSlider = document.querySelector("#l input");
-    const lValueDisplay = document.querySelector("#l .input-val");
-    lSlider.addEventListener("input", () => {
-        lValueDisplay.textContent = lSlider.value;
-    });
+        slider.addEventListener("input", () => {
+            valueDisplay.textContent = slider.value;
+        });
+    })
 })
+
+function checkAnswers() {
+    const hEl = document.getElementById('h')
+    const sEl = document.getElementById('s')
+    const lEl = document.getElementById('l')
+
+    const hGuess = hEl.querySelector('input').value
+    const sGuess = sEl.querySelector('input').value
+    const lGuess = lEl.querySelector('input').value
+
+    const hAnswerEl = hEl.querySelector('.answer')
+    const sAnswerEl = sEl.querySelector('.answer')
+    const lAnswerEl = lEl.querySelector('.answer')
+
+    // Give answers
+    hAnswerEl.innerHTML = checkGuess(checkHGuess, hGuess, currColor.h)
+    sAnswerEl.innerHTML = checkGuess(checkSGuess, sGuess, currColor.s)
+    lAnswerEl.innerHTML = checkGuess(checkLGuess, lGuess, currColor.l)
+}
 
 // ** Helper functions that interact with DOM ** // 
 function setRandomSwatchColor() {
@@ -112,5 +98,13 @@ function checkLGuess(guess, actual) {
         return 'pass'
     } else {
         return 'fail'
+    }
+}
+
+function checkGuess(guessCheckerFn, guess, actual) {
+    if (guessCheckerFn(guess, actual) === 'pass') {
+        return`✅ ${guess} (Actual: ${actual})`
+    } else {
+        return `❌ ${guess} (Actual: ${actual})`
     }
 }
