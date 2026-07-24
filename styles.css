@@ -18,6 +18,15 @@ body {
     height: 200px;
 }
 
+.hsl_form--guessing .answer {
+    display: none;
+}
+
+.hsl_form--answer input {
+    display: none;
+}
+
+
 .form_row {
     margin-bottom: 12px;
     height: 50px;

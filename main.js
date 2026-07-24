@@ -1,13 +1,10 @@
 
 
+// ** State ** //
 let currColor = generateRandomHslColor()
-let guessCorrectness = {
-    h: undefined,
-    s: undefined, 
-    l: undefined,
-} 
 
 
+// ** Event listeners ** // 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById("hsl_form");
     const swatch = document.getElementById("swatch")
@@ -16,28 +13,23 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', function(e) {
         e.preventDefault()
 
+        form.classList.add('hsl_form--answer')
+        form.classList.remove('hsl_form--guessing')
+
         const hGuess = document.getElementById('h').value
         const sGuess = document.getElementById('s').value
         const lGuess = document.getElementById('l').value
-        
-        let alertMsg = ''
-        if (Number(hGuess) !== Number(currColor.h)) {
-            alertMsg += `Wrong h. Was ${currColor.h} got ${hGuess}\n`
-        } else {
-            alertMsg += `Correct! Hue was ${currColor.h}`
-        }
-        if (Number(sGuess) !== Number(currColor.s)) {
-            alertMsg += `Wrong s. Was ${currColor.s} got ${sGuess}\n`
-        } else {
-            alertMsg += `Correct! Saturation was ${currColor.s}`
-        }
-        if (Number(lGuess) !== Number(currColor.l)) {
-            alertMsg += `Wrong l. Was ${currColor.l} got ${lGuess}\n`
-        } else {
-            alertMsg += `Correct! Lightness was ${currColor.l}`
+
+        const guess = {
+            h: hGuess, 
+            s: sGuess, 
+            l: lGuess
         }
 
-        alert(alertMsg)
+        checkGuess(guess, currColor);
+        if (checkHGuess(hGuess, currColor.h) === 'pass') {
+
+        }
     })
 
     form.addEventListener("input", () => {
@@ -45,8 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         button.disabled = !form.checkValidity();
     });
 })
-
-
 
 // ** Helper functions ** //
 function createHslColor({h, s, l}) {
@@ -62,5 +52,20 @@ function generateRandomHslColor() {
         h, 
         s, 
         l
+    }
+}
+
+function checkGuess(guess, currColor) {
+    checkHGuess(guess.h, currColor.h)
+    checkSGuess(guess.s, currColor.s)
+    checkLGuess(guess.l, currColor.l)
+}
+
+// h is a value between 0-360 so if within +- 36 let's say it's right.
+function checkHGuess(guess, actual) {
+    if (Math.abs(actual - guess) < 36 ) {
+        return 'pass'
+    } else {
+        return 'fail'
     }
 }
