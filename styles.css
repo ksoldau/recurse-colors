@@ -23,6 +23,15 @@ label {
     height: 200px;
 }
 
+#hue {
+    width: 40px;
+    height: 40px;
+}
+
+#h {
+    margin-bottom: 20px;
+}
+
 .hsl_form--guessing .answer {
     display: none;
 }
@@ -30,7 +39,6 @@ label {
 .hsl_form--answer .input-row {
     display: none;
 }
-
 
 .form_row {
     margin-bottom: 12px;

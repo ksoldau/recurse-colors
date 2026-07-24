@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     // Set up logic to show slider values
-    const sliderIds = ["h", "s", "l"];
+    const sliderIds = ["s", "l"];
     sliderIds.forEach((id) => {
         const slider = document.querySelector(`#${id} input`);
         const valueDisplay = document.querySelector(`#${id} .input-val`);
@@ -43,21 +43,16 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function checkAnswers() {
-    const hEl = document.getElementById('h')
     const sEl = document.getElementById('s')
     const lEl = document.getElementById('l')
 
-    const hGuess = hEl.querySelector('input').value
-    console.log('hGuess', hGuess)
     const sGuess = sEl.querySelector('input').value
     const lGuess = lEl.querySelector('input').value
 
-    const hAnswerEl = hEl.querySelector('.answer')
     const sAnswerEl = sEl.querySelector('.answer')
     const lAnswerEl = lEl.querySelector('.answer')
 
     // Give answers
-    hAnswerEl.innerHTML = checkGuess(checkHGuess, hGuess, currColor.h)
     sAnswerEl.innerHTML = checkGuess(checkSGuess, sGuess, currColor.s)
     lAnswerEl.innerHTML = checkGuess(checkLGuess, lGuess, currColor.l)
 }
@@ -66,6 +61,9 @@ function checkAnswers() {
 function setRandomSwatchColor() {
     const swatch = document.getElementById("swatch")
     swatch.style.backgroundColor = createHslColor(currColor)
+
+    const hue = document.getElementById("hue")
+    hue.style.backgroundColor = createHslColor({h: currColor.h, s: 50, l: 50})
 }
 
 // ** Helper functions ** //
@@ -85,14 +83,6 @@ function generateRandomHslColor() {
     }
 }
 
-// h is a value between 0-360 so if within +- 36 let's say it's right.
-function checkHGuess(guess, actual) {
-    if (Math.abs(actual - guess) < 36 ) {
-        return 'pass'
-    } else {
-        return 'fail'
-    }
-}
 
 // s is a value between 0-100 so if within +- 10 let's say it's right.
 function checkSGuess(guess, actual) {
