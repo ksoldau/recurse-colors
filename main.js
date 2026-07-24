@@ -21,8 +21,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const sGuess = document.getElementById('input_s').value
         const lGuess = document.getElementById('input_l').value
 
-        if (checkHGuess(hGuess, currColor.h) === 'pass') {
+        const hAnswerEl = document.querySelector('#h .answer')
+        const sAnswerEl = document.querySelector('#s .answer')
+        const lAnswerEl = document.querySelector('#l .answer')
 
+
+        hAnswerEl.innerHTML = "" 
+        if (checkHGuess(hGuess, currColor.h) === 'pass') {
+            hAnswerEl.innerHTML = `✅ ${hGuess} (Actual: ${currColor.h})`
+        } else {
+            hAnswerEl.innerHTML = `❌ ${hGuess} (Actual: ${currColor.h})`
+        }
+
+        sAnswerEl.innerHTML = "" 
+        if (checkSGuess(sGuess, currColor.s) === 'pass') {
+            sAnswerEl.innerHTML = `✅ ${sGuess} (Actual: ${currColor.s})`
+        } else {
+            sAnswerEl.innerHTML = `❌ ${sGuess} (Actual: ${currColor.s})`
+        }
+
+        lAnswerEl.innerHTML = "" 
+        if (checkLGuess(lGuess, currColor.l) === 'pass') {
+            lAnswerEl.innerHTML = `✅ ${lGuess} (Actual: ${currColor.l})`
+        } else {
+            lAnswerEl.innerHTML = `❌ ${lGuess} (Actual: ${currColor.l})`
         }
     })
 
@@ -52,6 +74,24 @@ function generateRandomHslColor() {
 // h is a value between 0-360 so if within +- 36 let's say it's right.
 function checkHGuess(guess, actual) {
     if (Math.abs(actual - guess) < 36 ) {
+        return 'pass'
+    } else {
+        return 'fail'
+    }
+}
+
+// s is a value between 0-100 so if within +- 10 let's say it's right.
+function checkSGuess(guess, actual) {
+    if (Math.abs(actual - guess) < 10 ) {
+        return 'pass'
+    } else {
+        return 'fail'
+    }
+}
+
+// l is a value between 0-100 so if within +- 10 let's say it's right.
+function checkLGuess(guess, actual) {
+    if (Math.abs(actual - guess) < 10 ) {
         return 'pass'
     } else {
         return 'fail'
