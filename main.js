@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const sGuess = document.getElementById('input_s').value
         const lGuess = document.getElementById('input_l').value
 
-        checkGuess(guess, currColor);
         if (checkHGuess(hGuess, currColor.h) === 'pass') {
 
         }
