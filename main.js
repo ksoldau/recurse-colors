@@ -20,12 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const sGuess = document.getElementById('s').value
         const lGuess = document.getElementById('l').value
 
-        const guess = {
-            h: hGuess, 
-            s: sGuess, 
-            l: lGuess
-        }
-
         checkGuess(guess, currColor);
         if (checkHGuess(hGuess, currColor.h) === 'pass') {
 
@@ -53,12 +47,6 @@ function generateRandomHslColor() {
         s, 
         l
     }
-}
-
-function checkGuess(guess, currColor) {
-    checkHGuess(guess.h, currColor.h)
-    checkSGuess(guess.s, currColor.s)
-    checkLGuess(guess.l, currColor.l)
 }
 
 // h is a value between 0-360 so if within +- 36 let's say it's right.
