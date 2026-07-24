@@ -15,20 +15,44 @@
     <form id="hsl_form" class="hsl_form--guessing">
         <div class="form_row" id="h">
             <label for="input_h">What is the hue?</label>
-            <input id="input_h" placeholder="0-360" required></input>
+            <input
+                id="input_h"
+                required
+                type="range"
+                min="0"
+                max="360"
+                value="180"
+                step="1"
+            ></input>
             <div class="answer">answer</div>
         </div>
         <div class="form_row" id="s">
             <label for"input_s">What is the saturation?</label>
-            <input id="input_s" placeholder="0-100" required></input>
+            <input
+                id="input_s"
+                required
+                type="range"
+                min="0"
+                max="100"
+                value="50"
+                step="1"
+            ></input>
             <div class="answer">answer</div>
         </div>
         <div class="form_row" id="l">
             <label for"input_l">What is the lightness?</label>
-            <input id="input_l" placeholder="0-100" required></input>
+            <input
+                id="input_l"
+                required
+                type="range"
+                min="0"
+                max="100"
+                value="50"
+                step="1"
+            ></input>
             <div class="answer">answer</div>
         </div>
-        <button id="submit" disabled>Check</button>
+        <button id="submit">Check</button>
     </form>
 </body>
 </html>

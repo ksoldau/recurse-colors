@@ -47,11 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lAnswerEl.innerHTML = `❌ ${lGuess} (Actual: ${currColor.l})`
         }
     })
-
-    form.addEventListener("input", () => {
-        const button = document.getElementById("submit")
-        button.disabled = !form.checkValidity();
-    });
 })
 
 // ** Helper functions ** //
